@@ -1,0 +1,2 @@
+[console_scripts]
+rfbrowser = Browser.entry.__main__:cli

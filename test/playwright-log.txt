@@ -1,0 +1,133 @@
+{"level":"info","time":"2026-09-25T17:20:51.207Z","seq":1,"component":"browser-library","msg":"Listening on 127.0.0.1:42849"}
+{"level":"info","time":"2026-09-25T17:20:51.347Z","seq":2,"component":"browser-library","event_kind":"grpc","action":"newBrowser","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:51.721Z","seq":3,"component":"browser-library","msg":"Adding browser to stack: chromium, version: 151.0.7922.34"}
+{"level":"info","time":"2026-09-25T17:20:51.721Z","seq":4,"component":"browser-library","msg":"Adding 0 contexts to browser"}
+{"level":"info","time":"2026-09-25T17:20:51.722Z","seq":5,"component":"browser-library","event_kind":"grpc","action":"newBrowser","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:20:51.727Z","seq":6,"component":"browser-library","event_kind":"grpc","action":"newPage","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:51.727Z","seq":7,"component":"browser-library","msg":"currentBrowser: {\"_contextStack\":[],\"browser\":{\"_type\":\"Browser\",\"_guid\":\"browser@4d6998b1d983a9344cacbf394080bf06\"},\"name\":\"chromium\",\"id\":\"browser=f7fd14c7-f3c9-4394-ac6f-ba41c0196c8a\",\"headless\":false}"}
+{"level":"info","time":"2026-09-25T17:20:51.791Z","seq":8,"component":"browser-library","msg":"Setting default timeout for context context=58b6b49a-5982-47c7-aeba-c981517d878b to 10000"}
+{"level":"info","time":"2026-09-25T17:20:51.792Z","seq":9,"component":"browser-library","msg":"Changed active context: context=58b6b49a-5982-47c7-aeba-c981517d878b"}
+{"level":"info","time":"2026-09-25T17:20:51.934Z","seq":10,"component":"browser-library","msg":"Video path: undefined"}
+{"level":"info","time":"2026-09-25T17:20:51.935Z","seq":11,"component":"browser-library","msg":"Changed active page"}
+{"level":"info","time":"2026-09-25T17:20:52.534Z","seq":12,"component":"browser-library","event_kind":"grpc","action":"newPage","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:20:52.546Z","seq":13,"component":"browser-library","event_kind":"grpc","action":"fillText","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:52.547Z","seq":14,"component":"browser-library","msg":"Strict mode is enabled, find Locator with //*[@id=\"username\"] in page."}
+{"level":"info","time":"2026-09-25T17:20:52.633Z","seq":15,"component":"browser-library","event_kind":"grpc","action":"fillText","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:20:52.639Z","seq":16,"component":"browser-library","event_kind":"grpc","action":"click","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:52.640Z","seq":17,"component":"browser-library","msg":"Strict mode is enabled, find Locator with //*[@id=\"log-in\"] in page."}
+{"level":"info","time":"2026-09-25T17:20:52.767Z","seq":18,"component":"browser-library","event_kind":"grpc","action":"click","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:20:52.776Z","seq":19,"component":"browser-library","event_kind":"grpc","action":"waitForElementState","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:52.776Z","seq":20,"component":"browser-library","msg":"Strict mode is enabled, find Locator with //html/body/div/div[3]/div[1]/div/div/div[2]/div[2] in page."}
+{"level":"info","time":"2026-09-25T17:20:52.924Z","seq":21,"component":"browser-library","event_kind":"grpc","action":"waitForElementState","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:20:52.933Z","seq":22,"component":"browser-library","event_kind":"grpc","action":"newBrowser","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:53.395Z","seq":23,"component":"browser-library","msg":"Adding browser to stack: webkit, version: 26.5"}
+{"level":"info","time":"2026-09-25T17:20:53.395Z","seq":24,"component":"browser-library","msg":"Adding 0 contexts to browser"}
+{"level":"info","time":"2026-09-25T17:20:53.395Z","seq":25,"component":"browser-library","event_kind":"grpc","action":"newBrowser","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:20:53.398Z","seq":26,"component":"browser-library","event_kind":"grpc","action":"newPage","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:53.399Z","seq":27,"component":"browser-library","msg":"currentBrowser: {\"_contextStack\":[],\"browser\":{\"_type\":\"Browser\",\"_guid\":\"browser@09ef97f5d9f23dedb3fdfb15ae839486\"},\"name\":\"webkit\",\"id\":\"browser=5c11efe3-a930-4ede-8f55-6d49b8cb498e\",\"headless\":false}"}
+{"level":"info","time":"2026-09-25T17:20:53.404Z","seq":28,"component":"browser-library","msg":"Setting default timeout for context context=1fc6c03d-d518-447b-986e-342ccd04ccf0 to 10000"}
+{"level":"info","time":"2026-09-25T17:20:53.404Z","seq":29,"component":"browser-library","msg":"Changed active context: context=1fc6c03d-d518-447b-986e-342ccd04ccf0"}
+{"level":"info","time":"2026-09-25T17:20:54.583Z","seq":30,"component":"browser-library","msg":"Video path: undefined"}
+{"level":"info","time":"2026-09-25T17:20:54.583Z","seq":31,"component":"browser-library","msg":"Changed active page"}
+{"level":"info","time":"2026-09-25T17:20:54.920Z","seq":32,"component":"browser-library","event_kind":"grpc","action":"newPage","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:20:54.927Z","seq":33,"component":"browser-library","event_kind":"grpc","action":"fillText","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:54.927Z","seq":34,"component":"browser-library","msg":"Strict mode is enabled, find Locator with //*[@id=\"username\"] in page."}
+{"level":"info","time":"2026-09-25T17:20:55.541Z","seq":35,"component":"browser-library","event_kind":"grpc","action":"fillText","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:20:55.545Z","seq":36,"component":"browser-library","event_kind":"grpc","action":"click","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:55.545Z","seq":37,"component":"browser-library","msg":"Strict mode is enabled, find Locator with //*[@id=\"log-in\"] in page."}
+{"level":"info","time":"2026-09-25T17:20:55.891Z","seq":38,"component":"browser-library","event_kind":"grpc","action":"click","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:20:55.900Z","seq":39,"component":"browser-library","event_kind":"grpc","action":"waitForElementState","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:55.900Z","seq":40,"component":"browser-library","msg":"Strict mode is enabled, find Locator with //html/body/div/div[3]/div[1]/div/div/div[2]/div[2] in page."}
+{"level":"info","time":"2026-09-25T17:20:56.682Z","seq":41,"component":"browser-library","event_kind":"grpc","action":"waitForElementState","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:20:56.688Z","seq":42,"component":"browser-library","event_kind":"grpc","action":"newBrowser","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:57.458Z","seq":43,"component":"browser-library","msg":"Adding browser to stack: firefox, version: 153.0"}
+{"level":"info","time":"2026-09-25T17:20:57.458Z","seq":44,"component":"browser-library","msg":"Adding 0 contexts to browser"}
+{"level":"info","time":"2026-09-25T17:20:57.458Z","seq":45,"component":"browser-library","event_kind":"grpc","action":"newBrowser","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:20:57.462Z","seq":46,"component":"browser-library","event_kind":"grpc","action":"newPage","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:57.462Z","seq":47,"component":"browser-library","msg":"currentBrowser: {\"_contextStack\":[],\"browser\":{\"_type\":\"Browser\",\"_guid\":\"browser@ca9cd466ce5d0337f5ca1e28002959a2\"},\"name\":\"firefox\",\"id\":\"browser=65569cc7-d357-46f2-b3dc-28a66d59afe1\",\"headless\":false}"}
+{"level":"info","time":"2026-09-25T17:20:57.675Z","seq":48,"component":"browser-library","msg":"Setting default timeout for context context=1f157706-e05a-4ee9-b37e-9c67e5f297a3 to 10000"}
+{"level":"info","time":"2026-09-25T17:20:57.675Z","seq":49,"component":"browser-library","msg":"Changed active context: context=1f157706-e05a-4ee9-b37e-9c67e5f297a3"}
+{"level":"info","time":"2026-09-25T17:20:58.645Z","seq":50,"component":"browser-library","msg":"Video path: undefined"}
+{"level":"info","time":"2026-09-25T17:20:58.645Z","seq":51,"component":"browser-library","msg":"Changed active page"}
+{"level":"info","time":"2026-09-25T17:20:59.257Z","seq":52,"component":"browser-library","event_kind":"grpc","action":"newPage","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:20:59.261Z","seq":53,"component":"browser-library","event_kind":"grpc","action":"fillText","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:59.261Z","seq":54,"component":"browser-library","msg":"Strict mode is enabled, find Locator with //*[@id=\"username\"] in page."}
+{"level":"info","time":"2026-09-25T17:20:59.372Z","seq":55,"component":"browser-library","event_kind":"grpc","action":"fillText","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:20:59.379Z","seq":56,"component":"browser-library","event_kind":"grpc","action":"click","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:59.379Z","seq":57,"component":"browser-library","msg":"Strict mode is enabled, find Locator with //*[@id=\"log-in\"] in page."}
+{"level":"info","time":"2026-09-25T17:20:59.719Z","seq":58,"component":"browser-library","event_kind":"grpc","action":"click","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:20:59.725Z","seq":59,"component":"browser-library","event_kind":"grpc","action":"waitForElementState","status":"started"}
+{"level":"info","time":"2026-09-25T17:20:59.725Z","seq":60,"component":"browser-library","msg":"Strict mode is enabled, find Locator with //html/body/div/div[3]/div[1]/div/div/div[2]/div[2] in page."}
+{"level":"info","time":"2026-09-25T17:20:59.987Z","seq":61,"component":"browser-library","event_kind":"grpc","action":"waitForElementState","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.008Z","seq":62,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.018Z","seq":63,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.023Z","seq":64,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.023Z","seq":65,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.027Z","seq":66,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.027Z","seq":67,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.032Z","seq":68,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.033Z","seq":69,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.043Z","seq":70,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.043Z","seq":71,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.053Z","seq":72,"suite_id":"s1","suite_name":"Login","component":"browser-library","msg":"Changed active context: context=58b6b49a-5982-47c7-aeba-c981517d878b"}
+{"level":"info","time":"2026-09-25T17:21:00.054Z","seq":73,"suite_id":"s1","suite_name":"Login","component":"browser-library","msg":"Changing current active page: page=0c7dc0bc-5e07-4078-b3a0-032060bd8def"}
+{"level":"info","time":"2026-09-25T17:21:00.054Z","seq":74,"suite_id":"s1","suite_name":"Login","component":"browser-library","msg":"Changed active page"}
+{"level":"info","time":"2026-09-25T17:21:00.060Z","seq":75,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"closeContext","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.087Z","seq":76,"suite_id":"s1","suite_name":"Login","component":"browser-library","msg":"Removed page=eafd6fbe-8b23-4fe7-aa11-673bd12991db from context=58b6b49a-5982-47c7-aeba-c981517d878b page stack"}
+{"level":"info","time":"2026-09-25T17:21:00.092Z","seq":77,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"closeContext","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.104Z","seq":78,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.104Z","seq":79,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.113Z","seq":80,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.114Z","seq":81,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.121Z","seq":82,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.121Z","seq":83,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.125Z","seq":84,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.127Z","seq":85,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.132Z","seq":86,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.133Z","seq":87,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.138Z","seq":88,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.139Z","seq":89,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.143Z","seq":90,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.143Z","seq":91,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.150Z","seq":92,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.151Z","seq":93,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.156Z","seq":94,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.156Z","seq":95,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.163Z","seq":96,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.165Z","seq":97,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.169Z","seq":98,"suite_id":"s1","suite_name":"Login","component":"browser-library","msg":"Changed active context: context=1fc6c03d-d518-447b-986e-342ccd04ccf0"}
+{"level":"info","time":"2026-09-25T17:21:00.170Z","seq":99,"suite_id":"s1","suite_name":"Login","component":"browser-library","msg":"Changing current active page: page=0ec77f2b-2c29-498a-80d4-bf65d2fe66d8"}
+{"level":"info","time":"2026-09-25T17:21:00.170Z","seq":100,"suite_id":"s1","suite_name":"Login","component":"browser-library","msg":"Changed active page"}
+{"level":"info","time":"2026-09-25T17:21:00.173Z","seq":101,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"closeContext","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.202Z","seq":102,"suite_id":"s1","suite_name":"Login","component":"browser-library","msg":"Removed page=7c6a17ca-0211-42c3-908a-259411c02c9a from context=1fc6c03d-d518-447b-986e-342ccd04ccf0 page stack"}
+{"level":"info","time":"2026-09-25T17:21:00.202Z","seq":103,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"closeContext","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.207Z","seq":104,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.208Z","seq":105,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.211Z","seq":106,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.212Z","seq":107,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.221Z","seq":108,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.222Z","seq":109,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.229Z","seq":110,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.229Z","seq":111,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.233Z","seq":112,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.233Z","seq":113,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.237Z","seq":114,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.237Z","seq":115,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.240Z","seq":116,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.240Z","seq":117,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.242Z","seq":118,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.243Z","seq":119,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.250Z","seq":120,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.251Z","seq":121,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"switchBrowser","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.255Z","seq":122,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.255Z","seq":123,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.257Z","seq":124,"suite_id":"s1","suite_name":"Login","component":"browser-library","msg":"Changed active context: context=1f157706-e05a-4ee9-b37e-9c67e5f297a3"}
+{"level":"info","time":"2026-09-25T17:21:00.257Z","seq":125,"suite_id":"s1","suite_name":"Login","component":"browser-library","msg":"Changing current active page: page=8583795f-e8ba-4272-842d-0a6b54e0f781"}
+{"level":"info","time":"2026-09-25T17:21:00.257Z","seq":126,"suite_id":"s1","suite_name":"Login","component":"browser-library","msg":"Changed active page"}
+{"level":"info","time":"2026-09-25T17:21:00.259Z","seq":127,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"closeContext","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.270Z","seq":128,"suite_id":"s1","suite_name":"Login","component":"browser-library","msg":"Removed page=e288c715-b5d0-416d-a7a0-d557bf6c162c from context=1f157706-e05a-4ee9-b37e-9c67e5f297a3 page stack"}
+{"level":"info","time":"2026-09-25T17:21:00.274Z","seq":129,"suite_id":"s1","suite_name":"Login","component":"browser-library","event_kind":"grpc","action":"closeContext","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.286Z","seq":130,"component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.286Z","seq":131,"component":"browser-library","event_kind":"grpc","action":"getBrowserCatalog","status":"succeeded"}
+{"level":"info","time":"2026-09-25T17:21:00.325Z","seq":132,"component":"browser-library","event_kind":"grpc","action":"closeAllBrowsers","status":"started"}
+{"level":"info","time":"2026-09-25T17:21:00.859Z","seq":133,"component":"browser-library","event_kind":"grpc","action":"closeAllBrowsers","status":"succeeded"}

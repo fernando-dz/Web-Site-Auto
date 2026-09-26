@@ -1,0 +1,775 @@
+# -*- coding: utf-8 -*-
+
+from AppiumLibrary.locators import ElementFinder
+from appium.webdriver.common.appiumby import AppiumBy
+from .keywordgroup import KeywordGroup
+from robot.libraries.BuiltIn import BuiltIn
+import ast
+from unicodedata import normalize
+from selenium.webdriver.remote.webelement import WebElement
+import time
+from datetime import timedelta
+from typing import Optional, Literal
+
+
+try:
+    basestring  # attempt to evaluate basestring
+
+
+    def isstr(s):
+        return isinstance(s, basestring)
+except NameError:
+    def isstr(s):
+        return isinstance(s, str)
+
+
+class _ElementKeywords(KeywordGroup):
+    def __init__(self):
+        self._element_finder = ElementFinder()
+        self._bi = BuiltIn()
+
+    # Public, element lookups
+    def clear_text(self, locator):
+        """Clears the text field identified by ``locator``.
+
+        See `introduction` for details about locating elements.
+        """
+        self._info("Clear text field '%s'" % locator)
+        self._element_clear_text_by_locator(locator)
+
+    def click_element(self, locator):
+        """Clicks the element identified by ``locator``.
+
+        Key attributes for arbitrary elements are `index` and `name`. See
+        `introduction` for details about locating elements.
+        """
+        self._info("Clicking element '%s'." % locator)
+        self._element_find(locator, True, True).click()
+
+    def click_text(self, text, exact_match=False):
+        """Clicks the text identified by ``text``.
+
+        By default, it attempts to click the first occurrence that contains the given ``text``.
+        If you want to click the exact matching text, set ``exact_match`` to `True`.
+
+        If there are multiple instances of ``text`` and you do not want the first one, then
+        use `locator` with `Get Web Elements` instead.
+
+        """
+        self._element_find_by_text(text,exact_match).click()
+
+    def input_text_into_current_element(self, text):
+        """Types the given ``text`` into the currently selected text field.\n
+
+        *Android only.*
+        """
+        self._info("Typing text '%s' into current text field" % text)
+        driver = self._current_application()
+        driver.set_clipboard_text(text)
+        driver.press_keycode(50, 0x1000 | 0x2000)
+
+    def input_text(self, locator, text):
+        """Types the given ``text`` into the text field identified by ``locator``.
+
+        See `introduction` for details about locating elements.
+        """
+        self._info("Typing text '%s' into text field '%s'" % (text, locator))
+        self._element_input_text_by_locator(locator, text)
+
+    def input_password(self, locator, text):
+        """Types the given password into the text field identified by ``locator``.
+
+        The difference between this keyword and `Input Text` is that this keyword
+        does not log the given password.
+
+        See `introduction` for details about locating elements.
+        """
+        self._info("Typing password into text field '%s'" % locator)
+        self._element_input_text_by_locator(locator, text)
+
+    def input_value(self, locator, text):
+        """Sets the given value into the text field identified by ``locator``.
+        Input Value makes use of set_value.
+
+        *iOS only.*
+
+        See `introduction` for details about locating elements.
+        """
+        self._info("Setting text '%s' into text field '%s'" % (text, locator))
+        self._element_input_value_by_locator(locator, text)
+
+    def hide_keyboard(self, key_name=None):
+        """Hides the software keyboard on the device if it is currently visible.
+
+        Args:
+         - ``key_name`` (iOS only): the name of the key to press to dismiss the keyboard.
+        On Android, this argument is ignored.
+
+        Examples:
+        | Hide Keyboard | Return |
+        | Hide Keyboard | Done |
+        """
+        driver = self._current_application()
+        driver.hide_keyboard(key_name)
+
+    def is_keyboard_shown(self):
+        """Returns true or false if the device keyboard is displayed."""
+        driver = self._current_application()
+        return driver.is_keyboard_shown()
+
+    def page_should_contain_text(self, text, loglevel='INFO'):
+        """Verifies that the current page contains ``text``.
+
+        Args:
+         - ``text``: the text that the page should contain
+         - ``loglevel``: if this keyword fails, it automatically logs the page source using the the given loglevel. Set this argument to `NONE` to disable logging.
+        """
+        if not self._is_text_present(text):
+            self.log_source(loglevel)
+            raise AssertionError("Page should have contained text '%s' "
+                                 "but did not" % text)
+        self._info("Current page contains text '%s'." % text)
+
+    def page_should_not_contain_text(self, text, loglevel='INFO'):
+        """Verifies that the current page does not contain ``text``.
+
+        Args:
+         - ``text``: the text that the page should not contain
+         - ``loglevel``: if this keyword fails, it automatically logs the page source using the the given loglevel. Set this argument to `NONE` to disable logging.
+        """
+        if self._is_text_present(text):
+            self.log_source(loglevel)
+            raise AssertionError("Page should not have contained text '%s'" % text)
+        self._info("Current page does not contains text '%s'." % text)
+
+    def page_should_contain_element(self, locator, loglevel='INFO'):
+        """Verifies that the current page contains the element with the ``locator``.
+
+       Args:
+         - ``locator``: locator of the element that the page should contain
+         - ``loglevel``: if this keyword fails, it automatically logs the page source using the the given loglevel. Set this argument to `NONE` to disable logging.
+        """
+        if not self._is_element_present(locator):
+            self.log_source(loglevel)
+            raise AssertionError("Page should have contained element '%s' "
+                                 "but did not" % locator)
+        self._info("Current page contains element '%s'." % locator)
+
+    def page_should_not_contain_element(self, locator, loglevel='INFO'):
+        """Verifies that the current page does not contain the element with the ``locator``.
+
+        Args:
+         - ``locator``: locator of the element that the page should not contain
+         - ``loglevel``: if this keyword fails, it automatically logs the page source using the the given loglevel. Set this argument to `NONE` to disable logging.
+        """
+        if self._is_element_present(locator):
+            self.log_source(loglevel)
+            raise AssertionError("Page should not have contained element '%s'" % locator)
+        self._info("Current page does not contain element '%s'." % locator)
+
+    def element_should_be_disabled(self, locator, loglevel='INFO'):
+        """*DEPRECATED!!* Use `Expect Element` instead
+
+        Verifies that element identified by ``locator`` is disabled.
+
+        Args:
+         - ``locator``: locator of the element that should be disabled
+         - ``loglevel``: if this keyword fails, it automatically logs the page source using the the given loglevel. Set this argument to `NONE` to disable logging.
+
+        Key attributes for arbitrary elements are `id` and `name`. See
+        `introduction` for details about locating elements.
+        """
+        if self._element_find(locator, True, True).is_enabled():
+            self.log_source(loglevel)
+            raise AssertionError("Element '%s' should be disabled "
+                                 "but did not" % locator)
+        self._info("Element '%s' is disabled ." % locator)
+
+    def element_should_be_enabled(self, locator, loglevel='INFO'):
+        """*DEPRECATED!!* Use `Expect Element` instead
+        Verifies that the element identified by ``locator`` is enabled.
+
+        Args:
+         - ``locator``: locator of the element that should be enabled
+         - ``loglevel``: if this keyword fails, it automatically logs the page source using the the given loglevel. Set this argument to `NONE` to disable logging.
+
+        Key attributes for arbitrary elements are `id` and `name`. See
+        `introduction` for details about locating elements.
+        """
+        if not self._element_find(locator, True, True).is_enabled():
+            self.log_source(loglevel)
+            raise AssertionError("Element '%s' should be enabled "
+                                 "but did not" % locator)
+        self._info("Element '%s' is enabled ." % locator)
+
+    def element_should_be_visible(self, locator, loglevel='INFO'):
+        """*DEPRECATED!!* Use `Expect Element` instead
+        Verifies that the element identified by ``locator`` is visible.
+
+        Key attributes for arbitrary elements are `id` and `name`. See
+        `introduction` for details about locating elements.
+        """
+        if not self._element_find(locator, True, True).is_displayed():
+            self.log_source(loglevel)
+            raise AssertionError("Element '%s' should be visible "
+                                 "but did not" % locator)
+
+    def element_attribute_should_match(self, locator, attr_name, match_pattern, regexp=False):
+        """Verifies that an attribute of an element matches the expected criteria.
+
+        The element is identified by ``locator``. See `introduction` for details
+        about locating elements. If more than one element matches, the first element is selected.
+
+        The ``attr_name`` is the name of the attribute within the selected element.
+
+        The ``match_pattern`` is used for the matching, if the match_pattern is
+        - boolean or 'True'/'true'/'False'/'false' String then a boolean match is applied
+        - any other string is cause a string match
+
+        The _regexp_ defines whether the string match is done using regular expressions (i.e. BuiltIn Library's
+        [http://robotframework.org/robotframework/latest/libraries/BuiltIn.html#Should%20Match%20Regexp|Should
+        Match Regexp] or string pattern match (i.e. BuiltIn Library's
+        [http://robotframework.org/robotframework/latest/libraries/BuiltIn.html#Should%20Match|Should
+        Match])
+
+
+        Examples:
+
+        | Element Attribute Should Match | xpath = //*[contains(@text,'foo')] | text | *foobar |
+        | Element Attribute Should Match | xpath = //*[contains(@text,'foo')] | text | f.*ar | regexp = True |
+        | Element Attribute Should Match | xpath = //*[contains(@text,'foo')] | enabled | True |
+
+        | 1. is a string pattern match i.e. the 'text' attribute should end with the string 'foobar'
+        | 2. is a regular expression match i.e. the regexp 'f.*ar' should be within the 'text' attribute
+        | 3. is a boolead match i.e. the 'enabled' attribute should be True
+
+
+        _*NOTE: *_
+        On Android the supported attribute names can be found in the uiautomator2 driver readme:
+        [https://github.com/appium/appium-uiautomator2-driver?tab=readme-ov-file#element-attributes]
+
+
+        _*NOTE: *_
+        Some attributes can be evaluated in two different ways e.g. these evaluate the same thing:
+
+        | Element Attribute Should Match | xpath = //*[contains(@text,'example text')] | name | txt_field_name |
+        | Element Name Should Be         | xpath = //*[contains(@text,'example text')] | txt_field_name |      |
+
+        """
+        elements = self._element_find(locator, False, True)
+        if len(elements) > 1:
+            self._info("CAUTION: '%s' matched %s elements - using the first element only" % (locator, len(elements)))
+
+        attr_value = elements[0].get_attribute(attr_name)
+
+        # ignore regexp argument if matching boolean
+        if isinstance(match_pattern, bool) or match_pattern.lower() == 'true' or match_pattern.lower() == 'false':
+            if isinstance(match_pattern, bool):
+                match_b = match_pattern
+            else:
+                match_b = ast.literal_eval(match_pattern.title())
+
+            if isinstance(attr_value, bool):
+                attr_b = attr_value
+            else:
+                attr_b = ast.literal_eval(attr_value.title())
+
+            self._bi.should_be_equal(match_b, attr_b)
+
+        elif regexp:
+            self._bi.should_match_regexp(attr_value, match_pattern,
+                                         msg="Element '%s' attribute '%s' should have been '%s' "
+                                             "but it was '%s'." % (locator, attr_name, match_pattern, attr_value),
+                                         values=False)
+        else:
+            self._bi.should_match(attr_value, match_pattern,
+                                  msg="Element '%s' attribute '%s' should have been '%s' "
+                                      "but it was '%s'." % (locator, attr_name, match_pattern, attr_value),
+                                  values=False)
+        # if expected != elements[0].get_attribute(attr_name):
+        #    raise AssertionError("Element '%s' attribute '%s' should have been '%s' "
+        #                         "but it was '%s'." % (locator, attr_name, expected, element.get_attribute(attr_name)))
+        self._info("Element '%s' attribute '%s' is '%s' " % (locator, attr_name, match_pattern))
+
+    def element_should_contain_text(self, locator, expected, message=''):
+        """Verifies the element identified by ``locator`` contains the text ``expected``.
+
+        If you wish to assert an exact (not a substring) match on the text
+        of the element, use `Element Text Should Be`.
+
+        Key attributes for arbitrary elements are ``id`` and ``xpath``. ``message`` can be used to override the default error message.
+        """
+        self._info("Verifying element '%s' contains text '%s'."
+                    % (locator, expected))
+        actual = self._get_text(locator)
+        if not expected in actual:
+            if not message:
+                message = "Element '%s' should have contained text '%s' but "\
+                          "its text was '%s'." % (locator, expected, actual)
+            raise AssertionError(message)
+
+    def element_should_not_contain_text(self, locator, expected, message=''):
+        """Verifies element identified by ``locator`` does not contain the text ``expected``.
+
+        ``message`` can be used to override the default error message.
+        See `Element Should Contain Text` for more details.
+        """
+        self._info("Verifying element '%s' does not contain text '%s'."
+                   % (locator, expected))
+        actual = self._get_text(locator)
+        if expected in actual:
+            if not message:
+                message = "Element '%s' should not contain text '%s' but " \
+                          "it did." % (locator, expected)
+            raise AssertionError(message)
+
+    def element_text_should_be(self, locator, expected, message=''):
+        """Verifies that the element identified by ``locator`` contains the exact text ``expected``.
+
+        In contrast to `Element Should Contain Text`, this keyword does not try
+        a substring match but an exact match on the element identified by ``locator``.
+
+        ``message`` can be used to override the default error message.
+
+        """
+        self._info("Verifying element '%s' contains exactly text '%s'."
+                    % (locator, expected))
+        element = self._element_find(locator, True, True)
+        actual = element.text
+        if expected != actual:
+            if not message:
+                message = "The text of element '%s' should have been '%s' but "\
+                          "in fact it was '%s'." % (locator, expected, actual)
+            raise AssertionError(message)
+
+    def get_webelement(self, locator):
+        """Returns the first [http://selenium-python.readthedocs.io/api.html#module-selenium.webdriver.remote.webelement|WebElement] object matching ``locator``.
+
+        Example:
+        | ${element}     | Get Webelement | id=my_element |
+        | Click Element  | ${element}     |               |
+
+        """
+        return self._element_find(locator, True, True)
+
+    def scroll_element_into_view(self, locator):
+        """Scrolls the element with the given ``locator`` into view.
+
+        Args:
+        - ``locator``: the locator used to find the requested element.
+
+        Key attributes for arbitrary elements are `id` and `name`. See `introduction` for
+        details about locating elements.
+
+        Example:
+        | Scroll Element Into View | css=div.class |
+        """
+        if isinstance(locator, WebElement):
+            element = locator
+        else:
+            self._info("Scrolling element '%s' into view." % locator)
+            element = self._element_find(locator, True, True)
+        script = 'arguments[0].scrollIntoView()'
+        # pylint: disable=no-member
+        self._current_application().execute_script(script, element)
+        return element
+
+    def get_webelement_in_webelement(self, element, locator):
+        """
+        Returns a single [http://selenium-python.readthedocs.io/api.html#module-selenium.webdriver.remote.webelement|WebElement]
+        object matching ``locator`` that is a child of the argument ``element``.
+
+        This is useful when your HTML doesn't properly have id or name elements on all elements.
+        This way the user can find an element with a tag and then search that element's children.
+        """
+        elements = None
+        if isstr(locator):
+            _locator = locator
+            elements = self._element_finder.find(element, _locator, None)
+            if len(elements) == 0:
+                raise ValueError("Element locator '" + locator + "' did not match any elements.")
+            if len(elements) == 0:
+                return None
+            return elements[0]
+        elif isinstance(locator, WebElement):
+            return locator
+
+    def get_webelements(self, locator):
+        """Returns a list of [http://selenium-python.readthedocs.io/api.html#module-selenium.webdriver.remote.webelement|WebElement] objects matching ``locator``.
+
+        Example:
+        | @{elements}    | Get Webelements | id=my_element |
+        | Click Element  | @{elements}[2]  |               |
+
+        """
+        return self._element_find(locator, False, True)
+
+    def get_element_attribute(self, locator, attribute):
+        """Returns the element attribute using the given ``attribute``, e.g. name, value, etc.
+
+        Examples:
+        | Get Element Attribute | locator | name |
+        | Get Element Attribute | locator | value |
+        """
+        elements = self._element_find(locator, False, True)
+        ele_len = len(elements)
+        if ele_len == 0:
+            raise AssertionError("Element '%s' could not be found" % locator)
+        elif ele_len > 1:
+            self._info("CAUTION: '%s' matched %s elements - using the first element only" % (locator, len(elements)))
+
+        try:
+            attr_val = elements[0].get_attribute(attribute)
+            self._info("Element '%s' attribute '%s' value '%s' " % (locator, attribute, attr_val))
+            return attr_val
+        except:
+            raise AssertionError("Attribute '%s' is not valid for element '%s'" % (attribute, locator))
+
+    def get_element_location(self, locator):
+        """Returns the location of the element with the ``locator``.
+
+        Key attributes for arbitrary elements are `id` and `name`. See
+        `introduction` for details about locating elements.
+        """
+        element = self._element_find(locator, True, True)
+        element_location = element.location
+        self._info("Element '%s' location: %s " % (locator, element_location))
+        return element_location
+
+    def get_element_size(self, locator):
+        """Returns the size of the element with the ``locator``.
+
+        Key attributes for arbitrary elements are `id` and `name`. See
+        `introduction` for details about locating elements.
+        """
+        element = self._element_find(locator, True, True)
+        element_size = element.size
+        self._info("Element '%s' size: %s " % (locator, element_size))
+        return element_size
+
+    def get_element_rect(self, locator):
+        """Returns the dimensions and coordinates of the element with the ``locator``.
+
+        Key attributes for arbitrary elements are `id` and `name`. See
+        `introduction` for details about locating elements.
+        """
+        element = self._element_find(locator, True, True)
+        element_rect = element.rect
+        self._info("Element '%s' rect: %s " % (locator, element_rect))
+        return element_rect
+
+    def get_text(self, locator, first_only: bool = True):
+        """Returns the text of the element with the ``locator``.
+
+        Args:
+         - ``locator``: locator of the element. For hybrid and mobile browser use `xpath` locator, as others might cause problems.
+         - ``first_only``: allows to get the text from the 1st match (default) or a list containing all matches.
+
+        Examples:
+        | ${text} | Get Text | //*[contains(@text,'foo')] |          |
+        | @{text} | Get Text | //*[contains(@text,'foo')] | ${False} |
+
+        """
+        text = self._get_text(locator, first_only)
+        self._info("Element '%s' text is '%s' " % (locator, text))
+        return text
+
+    def get_matching_xpath_count(self, xpath):
+        """Returns the number of elements matching the ``xpath``
+
+        One should not use the `xpath=` prefix for 'xpath'. XPath is assumed.
+
+        | *Correct:* |
+        | ${count}  | Get Matching Xpath Count | //android.view.View[@text='Test'] |
+        | *Incorrect:*  |
+        | ${count}  | Get Matching Xpath Count | xpath=//android.view.View[@text='Test'] |
+
+        If you wish to assert the number of matching elements, use
+        `Xpath Should Match X Times`.
+
+        """
+        count = len(self._element_find("xpath=" + xpath, False, False))
+        return str(count)
+
+    def text_should_be_visible(self, text, exact_match=False, loglevel='INFO'):
+        """*DEPRECATED!!* Use `Expect Text` instead
+        Verifies that the element identified by ``text`` is visible.
+
+        Args:
+         - ``text``: the text that should be visible
+         - ``exact_match``: if the exact match should be found, set this argument to `True`.
+        """
+        if not self._element_find_by_text(text, exact_match).is_displayed():
+            self.log_source(loglevel)
+            raise AssertionError("Text '%s' should be visible "
+                                 "but did not" % text)
+
+    def xpath_should_match_x_times(self, xpath, count, error=None, loglevel='INFO'):
+        """Verifies that the page contains the given number of elements (``count``) located by ``xpath``.
+
+        One should not use the `xpath=` prefix for 'xpath'. XPath is assumed.
+
+        | *Correct:* |
+        | Xpath Should Match X Times | //android.view.View[@text='Test'] | 1 |
+        | Incorrect: |
+        | Xpath Should Match X Times | xpath=//android.view.View[@text='Test'] | 1 |
+
+        ``error`` can be used to override the default error message.
+
+        See `Log Source` for explanation about ``loglevel`` argument.
+
+        """
+        actual_xpath_count = len(self._element_find("xpath=" + xpath, False, False))
+        if int(actual_xpath_count) != int(count):
+            if not error:
+                error = "Xpath %s should have matched %s times but matched %s times"\
+                            %(xpath, count, actual_xpath_count)
+            self.log_source(loglevel)
+            raise AssertionError(error)
+        self._info("Current page contains %s elements matching '%s'."
+                   % (actual_xpath_count, xpath))
+
+    def expect_element(self, locator: str, state: Literal["visible", "not visible", "enabled", "disabled"], timeout=timedelta(seconds=5), retry_interval=timedelta(seconds=1), message: Optional[str] = None, loglevel: Optional[str] = 'INFO'):
+        """Verifies that the element with the given ``locator`` has the desired ``state`` (visible, not visible, enabled, disabled.)
+
+        Args:
+        - ``locator``: the locator of the element to be checked.
+        - ``state``: the expected state of the element.
+        - ``timeout``: the maximum time to wait for the element to meet the condition. The default timeout is 5 seconds.
+        - ``retry_interval``: the interval at which the check is repeated before the timeout is reached. The default retry interval is 1 second.
+        - ``message``: a custom error message to display if the check fails. By setting this argument, the default error message gets overwritten.
+        - ``loglevel``: if this keyword fails, it automatically logs the page source using the the given loglevel. Set this argument to `NONE` to disable logging.
+
+        """
+        def assert_func():
+            element = self._element_find(locator, True, True)
+
+            if element is None:
+                raise AssertionError(f"Element {locator} not found")
+
+            if state == 'visible':
+                msg = message if message else f"Expected '{locator}' to be visible"
+                if not element.is_displayed():
+                    self.log_source(loglevel)
+                    raise AssertionError(msg)
+            elif state == 'enabled':
+                msg = message if message else f"Expected '{locator}' to be enabled"
+                if not element.is_enabled():
+                    self.log_source(loglevel)
+                    raise AssertionError(msg)
+            elif state == 'disabled':
+                msg = message if message else f"Expected '{locator}' to be disabled"
+                if element.is_enabled():
+                    self.log_source(loglevel)
+                    raise AssertionError(msg)
+            elif state == "not visible":
+                msg = message if message else f"Expected '{locator}' to not be visible"
+                if element.is_displayed():
+                    self.log_source(loglevel)
+                    raise AssertionError(msg)
+            else:
+                raise AssertionError(f"Invalid state: '{state}'. Use 'visible', 'not visible', 'enabled' or 'disabled' instead")
+
+        self._retry_assertion(assert_func=assert_func, timeout=timeout, retry_interval=retry_interval)
+
+    def expect_text(self, text: str, state: Literal["visible", "not visible", "enabled", "disabled"], exact_match=False, timeout=timedelta(seconds=5), retry_interval=timedelta(seconds=1), message: Optional[str] = None, loglevel: Optional[str]='INFO'):
+        """Verifies that the ``text`` has the desired ``state`` (visible, not visible).
+
+        Args:
+        - ``text``: the text to be checked.
+        - ``state``: the expected state of the text.
+        - ``timeout``: the maximum time to wait for the text to meet the condition. The default timeout is 5 seconds.
+        - ``retry_interval``: the interval at which the check is repeated before the timeout is reached. The default retry interval is 1 second.
+        - ``message``: a custom error message to display if the check fails. By setting this argument, the default error message gets overwritten.
+        - ``loglevel``: if this keyword fails, it automatically logs the page source using the the given loglevel. Set this argument to `NONE` to disable logging.
+        """
+        def assert_func():
+            text_element = self._element_find_by_text(text, exact_match)
+
+            if text_element is None:
+                self.log_source(loglevel)
+                raise AssertionError(f"Text {text} not found")
+
+            if state == 'visible':
+                msg = message if message else f"Expected '{text}' to be visible"
+                if not text_element.is_displayed():
+                    self.log_source(loglevel)
+                    raise AssertionError(msg)
+            elif state == "not visible":
+                msg = message if message else f"Expected '{text}' to not be visible"
+                if text_element.is_displayed():
+                    self.log_source(loglevel)
+                    raise AssertionError(msg)
+            else:
+                raise AssertionError(f"Invalid state: '{state}'. Use 'visible' or 'not visible' instead")
+
+        self._retry_assertion(assert_func=assert_func, timeout=timeout, retry_interval=retry_interval)
+
+    # Private
+
+    def _is_index(self, index_or_name):
+        if index_or_name.startswith('index='):
+            return True
+        else:
+            return False
+
+    def _click_element_by_name(self, name):
+        driver = self._current_application()
+        try:
+            element = driver.find_element(by=AppiumBy.NAME, value=name)
+        except Exception as e:
+            raise e
+
+        try:
+            element.click()
+        except Exception as e:
+            raise 'Cannot click the element with name "%s"' % name
+
+    def _find_elements_by_class_name(self, class_name):
+        driver = self._current_application()
+        elements = driver.find_elements(by=AppiumBy.CLASS_NAME, value=class_name)
+        return elements
+
+    def _find_element_by_class_name(self, class_name, index_or_name):
+        elements = self._find_elements_by_class_name(class_name)
+
+        if self._is_index(index_or_name):
+            try:
+                index = int(index_or_name.split('=')[-1])
+                element = elements[index]
+            except (IndexError, TypeError):
+                raise 'Cannot find the element with index "%s"' % index_or_name
+        else:
+            found = False
+            for element in elements:
+                self._info("'%s'." % element.text)
+                if element.text == index_or_name:
+                    found = True
+                    break
+            if not found:
+                raise 'Cannot find the element with name "%s"' % index_or_name
+
+        return element
+
+    def _get_class(self, platform_class_dict):
+        return platform_class_dict.get(self._get_platform())
+
+    def _is_support_platform(self, platform_class_dict):
+        return self._get_platform() in platform_class_dict
+
+    def _click_element_by_class_name(self, class_name, index_or_name):
+        element = self._find_element_by_class_name(class_name, index_or_name)
+        self._info("Clicking element '%s'." % element.text)
+        try:
+            element.click()
+        except Exception as e:
+            raise 'Cannot click the %s element "%s"' % (class_name, index_or_name)
+
+    def _element_clear_text_by_locator(self, locator):
+        try:
+            element = self._element_find(locator, True, True)
+            element.clear()
+        except Exception as e:
+            raise e
+
+    def _element_input_text_by_locator(self, locator, text):
+        try:
+            element = self._element_find(locator, True, True)
+            element.send_keys(text)
+        except Exception as e:
+            raise e
+
+    def _element_input_text_by_class_name(self, class_name, index_or_name, text):
+        try:
+            element = self._find_element_by_class_name(class_name, index_or_name)
+        except Exception as e:
+            raise e
+
+        self._info("input text in element as '%s'." % element.text)
+        try:
+            element.send_keys(text)
+        except Exception as e:
+            raise 'Cannot input text "%s" for the %s element "%s"' % (text, class_name, index_or_name)
+
+    def _element_input_value_by_locator(self, locator, text):
+        try:
+            element = self._element_find(locator, True, True)
+            element.set_value(text)
+        except Exception as e:
+            raise e
+
+    def _element_find(self, locator, first_only, required, tag=None):
+        application = self._current_application()
+        elements = None
+        if isstr(locator):
+            _locator = locator
+            elements = self._element_finder.find(application, _locator, tag)
+            if required and len(elements) == 0:
+                raise ValueError("Element locator '" + locator + "' did not match any elements.")
+            if first_only:
+                if len(elements) == 0: return None
+                return elements[0]
+        elif isinstance(locator, WebElement):
+            if first_only:
+                return locator
+            else:
+                elements = [locator]
+        # do some other stuff here like deal with list of webelements
+        # ... or raise locator/element specific error if required
+        return elements
+
+    def _element_find_by_text(self, text, exact_match=False):
+        if self._get_platform() == 'ios':
+            element = self._element_find(text, True, False)
+            if element:
+                return element
+            else:
+                if exact_match:
+                    _xpath = u'//*[@value="{}" or @label="{}"]'.format(text, text)
+                else:
+                    _xpath = u'//*[contains(@label,"{}") or contains(@value, "{}")]'.format(text, text)
+                return self._element_find(_xpath, True, True)
+        elif self._get_platform() == 'android':
+            if exact_match:
+                _xpath = u'//*[@{}="{}"]'.format('text', text)
+            else:
+                _xpath = u'//*[contains(@{},"{}")]'.format('text', text)
+            return self._element_find(_xpath, True, True)
+
+    def _get_text(self, locator, first_only: bool = True):
+        element = self._element_find(locator, first_only, True)
+        if element is not None:
+            if first_only:
+                return element.text
+            return [el.text for el in element]
+        return None
+
+    def _is_text_present(self, text):
+        text_norm = normalize('NFD', text)
+        source_norm = normalize('NFD', self.get_source())
+        return text_norm in source_norm
+
+    def _is_element_present(self, locator):
+        application = self._current_application()
+        elements = self._element_finder.find(application, locator, None)
+        return len(elements) > 0
+
+    def _is_visible(self, locator):
+        element = self._element_find(locator, True, False)
+        if element is not None:
+            return element.is_displayed()
+        return None
+
+    def _retry_assertion(self, assert_func, timeout=timedelta(seconds=5.0), retry_interval=timedelta(seconds=1)):
+        last_exception = None
+        start_time = time.time()
+        while time.time() - start_time < timeout.total_seconds():
+            try:
+                assert_func()
+                return
+            except  (AssertionError, Exception)  as e:
+                last_exception = e
+
+            time.sleep(retry_interval.total_seconds())
+
+        raise last_exception

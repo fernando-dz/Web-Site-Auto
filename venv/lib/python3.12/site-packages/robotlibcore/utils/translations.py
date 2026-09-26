@@ -1,0 +1,37 @@
+# Copyright 2017- Robot Framework Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from robot.api import logger
+
+
+def _translation(translation: Path | dict | None = None):
+    if isinstance(translation, Path) and translation.is_file():
+        with translation.open("r", encoding="utf-8") as file:
+            try:
+                return json.load(file)
+            except json.decoder.JSONDecodeError:
+                logger.warn(f"Could not convert json file {translation} to dictionary.")
+                return {}
+    elif isinstance(translation, dict):
+        return translation
+    else:
+        return {}
+
+
+def _translated_keywords(translation_data: dict) -> list:
+    return [item.get("name") for item in translation_data.values() if item.get("name")]

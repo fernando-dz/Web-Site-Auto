@@ -8,7 +8,7 @@ ${domainuser}   testbot
 ${domainemail}  @example.com
 ${username}     ${domainuser}${domainemail}
 ${password}    gibberish
-
+${secret}       
 
 *** Keywords ***
 ### Login ###
@@ -19,7 +19,7 @@ AcmeBank Login
     wait for elements state     //html/body/div/div[3]/div[1]/div/div/div[2]/div[2]    visible
 
 AcmeBank Bad User+Pass
-    ${secret}    Get Environment Variable    SECRET
+    ${secret}    Set Variable    SECRET
     Fill Text       //*[@id="username"]    Wild - no domain, and some punctuation too.
     Fill Secret     //*[@id="password"]    $secret
     Click           //*[@id="log-in"]
@@ -27,7 +27,7 @@ AcmeBank Bad User+Pass
     pass execution if  ${errorResult}==Pass
 
 AcmeBank Bad User
-    ${secret}    Get Environment Variable    SECRET
+    ${secret}    Set Variable   SECRET
     Fill Text       //*[@id="username"]    Wild - no domain, and some punctuation too.
     Fill Secret     //*[@id="password"]    $secret
     Click           //*[@id="log-in"]

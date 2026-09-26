@@ -1,0 +1,6 @@
+from typing import TypeVar
+
+def locals_to_params(args: dict) -> dict: ...
+T = TypeVar('T')
+
+def find_by_id(_id: str, item_list: list[dict[str, T]], log_error: bool = True) -> dict[str, T]: ...

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.12.3 on linux)" generated="2026-09-25T10:20:50.513514" rpa="false" schemaversion="5">
+<suite id="s1" name="Login" source="/home/nimosanchez/QSol/Web-Site-Auto/login.robot">
+<test id="s1-t1" name="Login To Acme" line="6">
+<kw name="Launch Acme Login" owner="Web-Keys">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-09-25T10:20:50.656822" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/home/nimosanchez/QSol/Web-Site-Auto/test/browser/traces/temp/0413ce12-3a2d-4a80-9ebe-a04788d30432"}</msg>
+<msg time="2026-09-25T10:20:50.662096" level="INFO">Starting Browser process /home/nimosanchez/.local/lib/python3.12/site-packages/Browser/wrapper/index.js using at 127.0.0.1:42849</msg>
+<msg time="2026-09-25T10:20:51.723524" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/home/nimosanchez/QSol/Web-Site-Auto/test/browser/traces/temp/0413ce12-3a2d-4a80-9ebe-a04788d30432"}</msg>
+<arg>${browser}</arg>
+<arg>headless=false</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-09-25T10:20:50.656187" elapsed="1.067587"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-09-25T10:20:52.537696" level="INFO">Successfully initialized new page object and opened url: https://demo.applitools.com</msg>
+<msg time="2026-09-25T10:20:52.537874" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>https://demo.applitools.com</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-09-25T10:20:51.724144" elapsed="0.814185"/>
+</kw>
+<kw name="AcmeBank Login" owner="Web-Keys">
+<kw name="Fill Text" owner="Browser">
+<msg time="2026-09-25T10:20:52.541339" level="INFO">Fills the text '$username' in the given field.</msg>
+<arg>//*[@id="username"]</arg>
+<arg>$username</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-09-25T10:20:52.540058" elapsed="0.095417"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-09-25T10:20:52.636750" level="INFO">Clicks the element '//*[@id="log-in"]'.</msg>
+<arg>//*[@id="log-in"]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-09-25T10:20:52.635812" elapsed="0.133432"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-09-25T10:20:52.927475" level="INFO">Waited for Element with selector //html/body/div/div[3]/div[1]/div/div/div[2]/div[2] at state visible</msg>
+<arg>//html/body/div/div[3]/div[1]/div/div/div[2]/div[2]</arg>
+<arg>visible</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-09-25T10:20:52.769823" elapsed="0.158141"/>
+</kw>
+<arg>${username}</arg>
+<status status="PASS" start="2026-09-25T10:20:52.538973" elapsed="0.389311"/>
+</kw>
+<arg>chromium</arg>
+<status status="PASS" start="2026-09-25T10:20:50.655428" elapsed="2.273025"/>
+</kw>
+<kw name="Launch Acme Login" owner="Web-Keys">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-09-25T10:20:52.930952" level="INFO">{"browser": "webkit", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/home/nimosanchez/QSol/Web-Site-Auto/test/browser/traces/temp/527c2dd7-5981-40b4-b63d-50d52066ea4f"}</msg>
+<msg time="2026-09-25T10:20:53.396580" level="INFO">Successfully created browser with options: {"browser":"webkit","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/home/nimosanchez/QSol/Web-Site-Auto/test/browser/traces/temp/527c2dd7-5981-40b4-b63d-50d52066ea4f"}</msg>
+<arg>${browser}</arg>
+<arg>headless=false</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-09-25T10:20:52.929677" elapsed="0.467065"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-09-25T10:20:54.921720" level="INFO">Successfully initialized new page object and opened url: https://demo.applitools.com</msg>
+<msg time="2026-09-25T10:20:54.921870" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>https://demo.applitools.com</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-09-25T10:20:53.396929" elapsed="1.525225"/>
+</kw>
+<kw name="AcmeBank Login" owner="Web-Keys">
+<kw name="Fill Text" owner="Browser">
+<msg time="2026-09-25T10:20:54.924148" level="INFO">Fills the text '$username' in the given field.</msg>
+<arg>//*[@id="username"]</arg>
+<arg>$username</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-09-25T10:20:54.923274" elapsed="0.620127"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-09-25T10:20:55.544099" level="INFO">Clicks the element '//*[@id="log-in"]'.</msg>
+<arg>//*[@id="log-in"]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-09-25T10:20:55.543618" elapsed="0.352686"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-09-25T10:20:56.683828" level="INFO">Waited for Element with selector //html/body/div/div[3]/div[1]/div/div/div[2]/div[2] at state visible</msg>
+<arg>//html/body/div/div[3]/div[1]/div/div/div[2]/div[2]</arg>
+<arg>visible</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-09-25T10:20:55.896615" elapsed="0.787517"/>
+</kw>
+<arg>${username}</arg>
+<status status="PASS" start="2026-09-25T10:20:54.922556" elapsed="1.761825"/>
+</kw>
+<arg>webkit</arg>
+<status status="PASS" start="2026-09-25T10:20:52.928931" elapsed="3.755600"/>
+</kw>
+<kw name="Launch Acme Login" owner="Web-Keys">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-09-25T10:20:56.686592" level="INFO">{"browser": "firefox", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/home/nimosanchez/QSol/Web-Site-Auto/test/browser/traces/temp/2d6aaa46-ad88-4482-87f5-d5b890ee366e"}</msg>
+<msg time="2026-09-25T10:20:57.459565" level="INFO">Successfully created browser with options: {"browser":"firefox","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/home/nimosanchez/QSol/Web-Site-Auto/test/browser/traces/temp/2d6aaa46-ad88-4482-87f5-d5b890ee366e"}</msg>
+<arg>${browser}</arg>
+<arg>headless=false</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-09-25T10:20:56.685603" elapsed="0.774154"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-09-25T10:20:59.258036" level="INFO">Successfully initialized new page object and opened url: https://demo.applitools.com</msg>
+<msg time="2026-09-25T10:20:59.258153" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>https://demo.applitools.com</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-09-25T10:20:57.459961" elapsed="1.798402"/>
+</kw>
+<kw name="AcmeBank Login" owner="Web-Keys">
+<kw name="Fill Text" owner="Browser">
+<msg time="2026-09-25T10:20:59.259909" level="INFO">Fills the text '$username' in the given field.</msg>
+<arg>//*[@id="username"]</arg>
+<arg>$username</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-09-25T10:20:59.259367" elapsed="0.115444"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-09-25T10:20:59.375944" level="INFO">Clicks the element '//*[@id="log-in"]'.</msg>
+<arg>//*[@id="log-in"]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-09-25T10:20:59.375130" elapsed="0.346080"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-09-25T10:20:59.988951" level="INFO">Waited for Element with selector //html/body/div/div[3]/div[1]/div/div/div[2]/div[2] at state visible</msg>
+<arg>//html/body/div/div[3]/div[1]/div/div/div[2]/div[2]</arg>
+<arg>visible</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-09-25T10:20:59.721529" elapsed="0.267678"/>
+</kw>
+<arg>${username}</arg>
+<status status="PASS" start="2026-09-25T10:20:59.258768" elapsed="0.730646"/>
+</kw>
+<arg>firefox</arg>
+<status status="PASS" start="2026-09-25T10:20:56.684947" elapsed="3.304625"/>
+</kw>
+<status status="PASS" start="2026-09-25T10:20:50.654775" elapsed="9.335492"/>
+</test>
+<status status="PASS" start="2026-09-25T10:20:50.514458" elapsed="9.761498"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Login">Login</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

@@ -1,0 +1,26 @@
+import logging
+from _typeshed import Incomplete
+from functools import cached_property as cached_property
+from pathlib import Path
+
+INSTALLATION_DIR: Incomplete
+NODE_MODULES: Incomplete
+IS_WINDOWS: Incomplete
+SHELL: Incomplete
+ROOT_FOLDER: Incomplete
+PLAYWRIGHT_BROWSERS_PATH: str
+IS_TERMINAL: Incomplete
+
+class LogWriter:
+    @cached_property
+    def logger(self) -> logging.Logger: ...
+    def log(self, message: str, silent_mode: bool = False): ...
+    def info(self, message: str): ...
+
+log_writer: Incomplete
+
+def log(message: str, silent_mode: bool = False): ...
+def write_marker(silent_mode: bool = False): ...
+def get_browser_lib(): ...
+def get_playwright_browser_path() -> Path: ...
+def ensure_playwright_browsers_path() -> None: ...

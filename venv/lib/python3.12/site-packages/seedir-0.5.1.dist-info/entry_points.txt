@@ -1,0 +1,2 @@
+[console_scripts]
+seedir = seedir.__main__:main

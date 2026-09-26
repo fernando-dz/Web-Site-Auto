@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.12.3 on linux)" generated="2026-09-24T22:05:41.415732" rpa="false" schemaversion="5">
+<suite id="s1" name="Acme Login" source="/home/nimosanchez/QSol/Web-Site-Auto/acme_login.robot">
+<test id="s1-t1" name="Login To Acme Works Across Browsers" line="25">
+<for flavor="IN">
+<iter>
+<kw name="Launch Acme" owner="acme_keys">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-09-24T22:05:41.529491" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/home/nimosanchez/QSol/Web-Site-Auto/results/browser/traces/temp/4f71f681-d22b-490e-ae26-31064ab60c61"}</msg>
+<msg time="2026-09-24T22:05:41.532925" level="INFO">Starting Browser process /home/nimosanchez/QSol/Web-Site-Auto/venv/lib/python3.12/site-packages/Browser/wrapper/index.js using at 127.0.0.1:53677</msg>
+<msg time="2026-09-24T22:05:42.311196" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/home/nimosanchez/QSol/Web-Site-Auto/results/browser/traces/temp/4f71f681-d22b-490e-ae26-31064ab60c61"}</msg>
+<arg>${browser}</arg>
+<arg>headless=${False}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-09-24T22:05:41.528986" elapsed="0.782434"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-09-24T22:05:43.043828" level="INFO">Successfully initialized new page object and opened url: https://demo.applitools.com</msg>
+<msg time="2026-09-24T22:05:43.043965" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${ACME_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-09-24T22:05:42.311800" elapsed="0.732506"/>
+</kw>
+<kw name="Register Keyword To Run On Failure" owner="Browser">
+<msg time="2026-09-24T22:05:43.046300" level="INFO">'Take Screenshot' will be run on failure.</msg>
+<arg>Take Screenshot</arg>
+<tag>Config</tag>
+<doc>Sets the keyword to execute, when a Browser keyword fails.</doc>
+<status status="PASS" start="2026-09-24T22:05:43.044692" elapsed="0.001712"/>
+</kw>
+<arg>${browser}</arg>
+<doc>Opens ACME Bank's login page in chromium (chromium/firefox/webkit).</doc>
+<status status="PASS" start="2026-09-24T22:05:41.528486" elapsed="1.518067"/>
+</kw>
+<kw name="AcmeBank Login" owner="acme_keys">
+<kw name="Fill Text" owner="Browser">
+<msg time="2026-09-24T22:05:43.047867" level="INFO">Fills the text 'testuser' in the given field.</msg>
+<arg>css=#username</arg>
+<arg>${username}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-09-24T22:05:43.047279" elapsed="0.054162"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2026-09-24T22:05:43.102091" level="INFO">Fills the text 'testpass' in the given field.</msg>
+<arg>css=#password</arg>
+<arg>${password}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-09-24T22:05:43.101624" elapsed="0.012186"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-09-24T22:05:43.114399" level="INFO">Clicks the element 'css=#log-in'.</msg>
+<arg>css=#log-in</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-09-24T22:05:43.114016" elapsed="0.083037"/>
+</kw>
+<kw name="Wait For Load State" owner="Browser">
+<msg time="2026-09-24T22:05:43.197982" level="INFO">Waiting page load to state to receive load in 10000.0</msg>
+<msg time="2026-09-24T22:05:43.286782" level="INFO">Load state load got in 10000</msg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits that the page reaches the required load state.</doc>
+<status status="PASS" start="2026-09-24T22:05:43.197352" elapsed="0.089562"/>
+</kw>
+<doc>Fills the login form and signs in.</doc>
+<status status="PASS" start="2026-09-24T22:05:43.046833" elapsed="0.240183"/>
+</kw>
+<kw name="Get Url" owner="Browser">
+<msg time="2026-09-24T22:05:43.289772" level="INFO">${url} = https://demo.applitools.com/app.html</msg>
+<var>${url}</var>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" start="2026-09-24T22:05:43.287146" elapsed="0.002667"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${url}</arg>
+<arg>app.html</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2026-09-24T22:05:43.289940" elapsed="0.000234"/>
+</kw>
+<kw name="Close Acme Session" owner="acme_keys">
+<kw name="Close Browser" owner="Browser">
+<msg time="2026-09-24T22:05:43.391044" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-09-24T22:05:43.290506" elapsed="0.100806"/>
+</kw>
+<status status="PASS" start="2026-09-24T22:05:43.290304" elapsed="0.101156"/>
+</kw>
+<var name="${browser}">chromium</var>
+<status status="PASS" start="2026-09-24T22:05:41.528176" elapsed="1.863357"/>
+</iter>
+<iter>
+<kw name="Launch Acme" owner="acme_keys">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-09-24T22:05:43.393010" level="INFO">{"browser": "firefox", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/home/nimosanchez/QSol/Web-Site-Auto/results/browser/traces/temp/97f57391-00c6-443c-b6fd-5114a4ad3652"}</msg>
+<msg time="2026-09-24T22:05:44.016214" level="INFO">Successfully created browser with options: {"browser":"firefox","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/home/nimosanchez/QSol/Web-Site-Auto/results/browser/traces/temp/97f57391-00c6-443c-b6fd-5114a4ad3652"}</msg>
+<arg>${browser}</arg>
+<arg>headless=${False}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-09-24T22:05:43.392447" elapsed="0.623896"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-09-24T22:05:45.461098" level="INFO">Successfully initialized new page object and opened url: https://demo.applitools.com</msg>
+<msg time="2026-09-24T22:05:45.461188" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${ACME_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-09-24T22:05:44.016514" elapsed="1.444848"/>
+</kw>
+<kw name="Register Keyword To Run On Failure" owner="Browser">
+<msg time="2026-09-24T22:05:45.462595" level="INFO">'Take Screenshot' will be run on failure.</msg>
+<arg>Take Screenshot</arg>
+<tag>Config</tag>
+<doc>Sets the keyword to execute, when a Browser keyword fails.</doc>
+<status status="PASS" start="2026-09-24T22:05:45.461573" elapsed="0.001107"/>
+</kw>
+<arg>${browser}</arg>
+<doc>Opens ACME Bank's login page in firefox (chromium/firefox/webkit).</doc>
+<status status="PASS" start="2026-09-24T22:05:43.392143" elapsed="2.070648"/>
+</kw>
+<kw name="AcmeBank Login" owner="acme_keys">
+<kw name="Fill Text" owner="Browser">
+<msg time="2026-09-24T22:05:45.463761" level="INFO">Fills the text 'testuser' in the given field.</msg>
+<arg>css=#username</arg>
+<arg>${username}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-09-24T22:05:45.463346" elapsed="0.056794"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2026-09-24T22:05:45.521173" level="INFO">Fills the text 'testpass' in the given field.</msg>
+<arg>css=#password</arg>
+<arg>${password}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-09-24T22:05:45.520399" elapsed="0.015839"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-09-24T22:05:45.536862" level="INFO">Clicks the element 'css=#log-in'.</msg>
+<arg>css=#log-in</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-09-24T22:05:45.536420" elapsed="0.225511"/>
+</kw>
+<kw name="Wait For Load State" owner="Browser">
+<msg time="2026-09-24T22:05:45.762543" level="INFO">Waiting page load to state to receive load in 10000.0</msg>
+<msg time="2026-09-24T22:05:45.869603" level="INFO">Load state load got in 10000</msg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits that the page reaches the required load state.</doc>
+<status status="PASS" start="2026-09-24T22:05:45.762121" elapsed="0.107668"/>
+</kw>
+<doc>Fills the login form and signs in.</doc>
+<status status="PASS" start="2026-09-24T22:05:45.462999" elapsed="0.406904"/>
+</kw>
+<kw name="Get Url" owner="Browser">
+<msg time="2026-09-24T22:05:45.873731" level="INFO">${url} = https://demo.applitools.com/app.html</msg>
+<var>${url}</var>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" start="2026-09-24T22:05:45.870040" elapsed="0.003730"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${url}</arg>
+<arg>app.html</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2026-09-24T22:05:45.873960" elapsed="0.000239"/>
+</kw>
+<kw name="Close Acme Session" owner="acme_keys">
+<kw name="Close Browser" owner="Browser">
+<msg time="2026-09-24T22:05:46.241711" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-09-24T22:05:45.874757" elapsed="0.367077"/>
+</kw>
+<status status="PASS" start="2026-09-24T22:05:45.874416" elapsed="0.367509"/>
+</kw>
+<var name="${browser}">firefox</var>
+<status status="PASS" start="2026-09-24T22:05:43.391822" elapsed="2.850142"/>
+</iter>
+<var>${browser}</var>
+<value>chromium</value>
+<value>firefox</value>
+<status status="PASS" start="2026-09-24T22:05:41.527931" elapsed="4.714087"/>
+</for>
+<status status="PASS" start="2026-09-24T22:05:41.527683" elapsed="4.714461"/>
+</test>
+<doc>Cross-browser login check against the Applitools ACME Bank demo
+(https://demo.applitools.com) — Chromium and Firefox.
+
+Replaces this repo's original login.robot/Web-Keys.robot, which had rotted
+(broken selectors/library versions after not being touched for a long time).
+Current selectors (#username, #password, #log-in) verified live against the real
+site on 2026-09-24, not assumed from the old code.
+
+Dropped the original's "Bad Logins" scenario: verified live that the demo site has
+no real credential validation at all — a blank submit still reaches the dashboard —
+so there's no error state left to actually assert against. Keeping that test would
+mean reproducing the exact "looks like it verifies something, doesn't" problem this
+rewrite exists to fix.
+
+WebKit is intentionally left out of the browser list below: it hangs on page
+navigation on this particular dev machine even after fixing the missing
+libwebkitgtk-6.0-4 system library — looks like a WebKit-on-Linux environment quirk
+specific to this box, not a defect in the suite itself (Chromium and Firefox both
+verified working end to end). Add "webkit" back to the FOR loop below once that's
+sorted out, or if running this on a different machine where it isn't an issue.</doc>
+<status status="PASS" start="2026-09-24T22:05:41.416876" elapsed="4.831395"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Acme Login">Acme Login</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
